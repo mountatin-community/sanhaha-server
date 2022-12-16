@@ -2,12 +2,16 @@ package com.sanhaha.sanhahaserver.service;
 
 import com.sanhaha.sanhahaserver.domain.posts.Posts;
 import com.sanhaha.sanhahaserver.domain.posts.PostsRepository;
+import com.sanhaha.sanhahaserver.web.dto.PostsListResponseDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsResponseDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsSaveRequestDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -35,5 +39,12 @@ public class PostsService {
         Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id));
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc().stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 }
