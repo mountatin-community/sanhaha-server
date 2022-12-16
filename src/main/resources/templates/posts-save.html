@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<th:block th:replace="fragments/header :: headerFragment"></th:block>
+<body>
+<form action="item.html" th:action th:object="${posts}" method="post">
+    <div>
+        <label for="itemName">제목</label>
+        <input type="text" id="itemName" th:field="*{title}" class="form
+ontrol" placeholder="제목을 입력하세요">
+    </div>
+    <div>
+        <label for="price">작성자</label>
+        <input type="text" id="price" th:field="*{author}" class="form-control"
+               placeholder="작성자를 입력하세요">
+    </div>
+    <div>
+        <label for="quantity">내용</label>
+        <input type="text" id="quantity" th:field="*{content}" class="form
+ontrol" placeholder="내용을 입력하세요">
+    </div>
+    <div>
+        <button type="submit">저장</button>
+        <button type="button" onclick="history.back()">뒤로가기</button>
+        <button type="reset">다시 작성</button>
+    </div>
+</form>
+</body>
+<th:block th:replace=" fragments/footer :: footerFragment"></th:block>
+</html>
