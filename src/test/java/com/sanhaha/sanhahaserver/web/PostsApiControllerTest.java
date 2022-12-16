@@ -2,7 +2,7 @@ package com.sanhaha.sanhahaserver.web;
 
 import com.sanhaha.sanhahaserver.domain.posts.Posts;
 import com.sanhaha.sanhahaserver.domain.posts.PostsRepository;
-import com.sanhaha.sanhahaserver.web.dto.PostUpdateRequestDto;
+import com.sanhaha.sanhahaserver.web.dto.PostsUpdateRequestDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsSaveRequestDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
@@ -83,14 +83,14 @@ class PostsApiControllerTest {
         String nextTitle = "테스트 수정 게시글";
         String nextContent = "테스트 수정 콘텐츠";
 
-        PostUpdateRequestDto requestDto = PostUpdateRequestDto.builder()
+        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
                 .title(nextTitle)
                 .content(nextContent)
                 .build();
 
         String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
 
-        HttpEntity<PostUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         //when
         ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
