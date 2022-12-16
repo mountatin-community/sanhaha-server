@@ -3,6 +3,7 @@ package com.sanhaha.sanhahaserver.web;
 import com.sanhaha.sanhahaserver.service.PostsService;
 import com.sanhaha.sanhahaserver.web.dto.PostsResponseDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsSaveRequestDto;
+import com.sanhaha.sanhahaserver.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class PostsApiController {
     }
 
     @PutMapping("/api/v1/posts/{id}")
-    public Long update(@PathVariable Long id, @RequestBody PostsSaveRequestDto requestDto) {
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
