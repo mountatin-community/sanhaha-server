@@ -26,7 +26,7 @@ dependencies {
     implementation("org.mariadb.jdbc:mariadb-java-client")
 
     implementation('org.springframework.boot:spring-boot-starter-test')
-//    implementation("org.springframework.security:spring-security-test")
+    implementation("org.springframework.security:spring-security-test")
     implementation('junit:juni5')
 }
 
