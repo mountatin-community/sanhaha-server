@@ -6,10 +6,10 @@ import com.sanhaha.sanhahaserver.domain.posts.PostsRepository;
 import com.sanhaha.sanhahaserver.web.dto.PostsSaveRequestDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsUpdateRequestDto;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
@@ -17,7 +17,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -29,9 +29,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-class PostsApiControllerTest {
+public class PostsApiControllerTest {
 
     @LocalServerPort
     private int port;
@@ -46,7 +46,7 @@ class PostsApiControllerTest {
     private WebApplicationContext context;
     private MockMvc mockMvc;
 
-    @BeforeEach
+    @Before
     public void 셋업() {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(context)
@@ -54,14 +54,14 @@ class PostsApiControllerTest {
                 .build();
     }
 
-    @AfterEach
+    @After
     public void 초기화() {
         postsRepository.deleteAll();
     }
 
     @Test
     @WithMockUser(roles = "USER")
-    void 등록_WRITE_테스트() throws Exception {
+    public void 등록_WRITE_테스트() throws Exception {
         //given
         String title = "테스트 게시글";
         String content = "테스트 본문";
@@ -90,7 +90,7 @@ class PostsApiControllerTest {
 
     @Test
     @WithMockUser(roles = "USER")
-    void 수정_UPDATE_테스트() throws Exception {
+    public void 수정_UPDATE_테스트() throws Exception {
         //given
         String prevTitle = "테스트 게시글";
         String prevContent = "테스트 게시글";

@@ -1,33 +1,32 @@
 package com.sanhaha.sanhahaserver.domain.posts;
 
 import com.sanhaha.sanhahaserver.service.PostsService;
-import com.sanhaha.sanhahaserver.web.dto.PostsSaveRequestDto;
 import com.sanhaha.sanhahaserver.web.dto.PostsUpdateRequestDto;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@ExtendWith(SpringExtension.class)
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class PostsRepositoryTest {
+public class PostsRepositoryTest {
 
     @Autowired
     PostsRepository postsRepository;
 
-    @AfterEach
+    @After
     public void 초기화() {
         postsRepository.deleteAll();
     }
 
     @Test
-    void 게시글_저장_불러오기() {
+    public void 게시글_저장_불러오기() {
         //given
         String title = "테스트 게시글";
         String content = "테스트 본문";
@@ -50,7 +49,7 @@ class PostsRepositoryTest {
     }
 
     @Test
-    void BaseTimeEntity가_extends_된_Posts_클래스_확인() {
+    public void BaseTimeEntity가_extends_된_Posts_클래스_확인() {
         //given
         String prevTitle = "테스트 게시글";
         String prevContent = "테스트 본문";
