@@ -1,21 +1,36 @@
-plugins {
-    id 'java'
-    id 'org.springframework.boot' version '2.7.1'
-    id 'io.spring.dependency-management' version '1.1.0'
+buildscript {
+    ext {
+        springBootVersion = '2.1.9.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
-group = 'com.sanhaha'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 11
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.sanhaha.sanhaha-server'
+version '1.0.4-SNAPSHOT-'+new Date().format("yyyyMMddHHmmss")
+sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.projectlombok:lombok')
+    compileOnly('org.projectlombok:lombok')
+    annotationProcessor('org.projectlombok:lombok')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation('org.springframework.boot:spring-boot-starter-mustache')
     implementation('com.h2database:h2')
 
     implementation('org.springframework.boot:spring-boot-starter-oauth2-client')
@@ -23,10 +38,6 @@ dependencies {
 
     implementation("org.mariadb.jdbc:mariadb-java-client")
 
-    implementation('org.springframework.boot:spring-boot-starter-test')
-    implementation("org.springframework.security:spring-security-test")
-}
-
-tasks.named('test') {
-    useJUnitPlatform()
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation("org.springframework.security:spring-security-test")
 }
